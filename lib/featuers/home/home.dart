@@ -43,24 +43,33 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text("loading"),
               );
             }
+
             if (snapshot.hasData) {
               final quotesDetails = snapshot.data;
-              print(quotesDetails);
-              return ListView.builder(
-                itemCount: quotesDetails!.q?.length ?? 0,
-                itemBuilder: (context, index) {
-                  return Container(
-                    width: double.infinity,
-                    height: 100,
-                    color: Colors.blueAccent[200],
-                    child: Column(children: [
-                      Text(
-                          "You don't need a weatherman to know which way the wind blows."),
-                      Text("Bob Dylan"),
-                    ]),
-                  );
-                },
-              );
+              if (quotesDetails!.error != null) {
+                return Center(
+                  child: Text('Error: ${quotesDetails.error}'),
+                );
+              } else {
+                final quotesDetails = snapshot.data;
+
+                print(quotesDetails);
+                return ListView.builder(
+                  itemCount: quotesDetails!.q?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      width: double.infinity,
+                      height: 100,
+                      color: Colors.blueAccent[200],
+                      child: Column(children: [
+                        Text(
+                            "You don't need a weatherman to know which way the wind blows."),
+                        Text("Bob Dylan"),
+                      ]),
+                    );
+                  },
+                );
+              }
             } else {
               return const Center(
                 child: Text('No data available'),
