@@ -8,7 +8,7 @@ class QuotesRepo {
   Future<QuotesReqModel?> quotesReq() async {
     try {
       final response = await dioClient.quoteClient(endpoint: EndPoints.quotes);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final quotesResponse = QuotesReqModel.fromJson(response.data);
         if (quotesResponse.c != null &&
             quotesResponse.a != null &&

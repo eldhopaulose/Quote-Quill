@@ -18,8 +18,12 @@ class DioClient {
   }
   Future<dynamic> quoteClient({
     required EndPoints endpoint,
+    Map<String, dynamic>? headers,
   }) async {
     Response response;
+    if (headers != null) {
+      _dio.options.headers.addAll(headers);
+    }
     try {
       switch (endpoint.type()) {
         case ReqType.GET:
