@@ -29,6 +29,7 @@ class DioClient {
         case ReqType.GET:
           response = await _dio.get("$baseUrl/${endpoint.path()}");
       }
+      return response;
     } on DioException catch (e) {
       if (e.response != null) {
         response = e.response!;

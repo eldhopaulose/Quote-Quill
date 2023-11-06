@@ -17,10 +17,11 @@ class QuotesReqModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['q'] = q;
-    data['a'] = a;
-    data['c'] = c;
-    data['h'] = h;
+    data['q'] = this.q;
+    data['a'] = this.a;
+    data['c'] = this.c;
+    data['h'] = this.h;
+    data['error'] = this.error;
     return data;
   }
 }
