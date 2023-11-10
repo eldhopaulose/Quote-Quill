@@ -11,7 +11,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Future<QuotesReqModel?> fetchData() async {
+  Future<QuotesRespWrapper?> fetchData() async {
     final QuotesRepo quotesRepo = QuotesRepo();
     final response = await quotesRepo.quotesReq();
 
@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
           height: double.infinity,
           width: double.infinity,
           color: Colors.amber,
-          child: FutureBuilder<QuotesReqModel?>(
+          child: FutureBuilder<QuotesRespWrapper?>(
             future: fetchData(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ListView.builder(
-                      itemCount: quotesDetails.q?.length ?? 0,
+                      itemCount: quotesDetails.quotesList.length ?? 0,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -70,9 +70,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("Quote: ${quotesDetails.q}"),
+                                Text("Quote: ${quotesDetails.quotesList[index].q}"),
                                 SizedBox(),
-                                Text("Author: ${quotesDetails.a}"),
+                                Text("Author: ${quotesDetails.quotesList[index].a}"),
                               ],
                             ),
                           ),

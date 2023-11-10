@@ -25,3 +25,10 @@ class QuotesReqModel {
     return data;
   }
 }
+
+class QuotesRespWrapper{
+  final List<QuotesReqModel> quotesList;
+  final String? error;
+
+  QuotesRespWrapper({required this.quotesList, this.error});
+}
