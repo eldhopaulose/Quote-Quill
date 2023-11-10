@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:quote_quill/featuers/home/home.dart';
+import 'package:provider/provider.dart';
+import 'package:quote_quill/featuers/home/bloc/home_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: Provider(create: (_) => HomeBloc(), child: const MyHomePage()),
     );
   }
 }

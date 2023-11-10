@@ -1,92 +1,70 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:quote_quill/networks/models/quotes_req_model.dart';
-import 'package:quote_quill/networks/repo/quotes_repo.dart';
+part of 'package:quote_quill/featuers/home/bloc/home_bloc.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key});
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Future<QuotesRespWrapper?> fetchData() async {
-    final QuotesRepo quotesRepo = QuotesRepo();
-    final response = await quotesRepo.quotesReq();
-
-    return response;
+  @override
+  void initState() {
+    super.initState();
+    // Initialize your bloc or handle this initialization appropriately
+    HomeBloc().add(const _GetData());
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Quotes"),
-          centerTitle: true,
-        ),
-        body: Container(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Quotes"),
+        centerTitle: true,
+      ),
+      body: SafeArea(
+        child: Container(
           height: double.infinity,
           width: double.infinity,
           color: Colors.amber,
-          child: FutureBuilder<QuotesRespWrapper?>(
-            future: fetchData(),
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text('Error: ${snapshot.error}'),
-                );
-              }
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: Text("Loading"),
-                );
-              }
-
-              if (snapshot.hasData) {
-                final quotesDetails = snapshot.data;
-                if (quotesDetails!.error != null) {
-                  print("Error: ${quotesDetails.error}");
-                  return Center(
-                    child: Text('Error: ${quotesDetails.error}'),
-                  );
-                } else {
-                  return Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ListView.builder(
-                      itemCount: quotesDetails.quotesList.length ?? 0,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            width: double.infinity,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              color: Colors.blueAccent[200],
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Quote: ${quotesDetails.quotesList[index].q}"),
-                                SizedBox(),
-                                Text("Author: ${quotesDetails.quotesList[index].a}"),
-                              ],
-                            ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BlocBuilder<HomeBloc, HomeState>(
+              builder: (context, state) {
+                if (state is _Loading) {
+                  return Center(child: CircularProgressIndicator());
+                } else if (state is _Sucess) {
+                  return ListView.builder(
+                    itemCount: state.quotesList.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            color: Colors.blueAccent[200],
+                            borderRadius: BorderRadius.circular(10),
                           ),
-                        );
-                      },
-                    ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Quote: ${state.quotesList[index].q}"),
+                              Text("Author: ${state.quotesList[index].a}"),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   );
+                } else if (state is _Failed) {
+                  return Center(child: Text(state.error));
+                } else {
+                  return Center(child: const Text("Unhandled state"));
                 }
-              } else {
-                return const Center(
-                  child: Text('No data available'),
-                );
-              }
-            },
+              },
+            ),
           ),
         ),
       ),
