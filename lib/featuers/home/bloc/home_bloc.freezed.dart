@@ -283,7 +283,7 @@ mixin _$HomeState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(dynamic quotesList) sucess,
+    required TResult Function(List<QuotesReqModel> quotesList) sucess,
     required TResult Function(String error) failed,
   }) =>
       throw _privateConstructorUsedError;
@@ -291,7 +291,7 @@ mixin _$HomeState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(dynamic quotesList)? sucess,
+    TResult? Function(List<QuotesReqModel> quotesList)? sucess,
     TResult? Function(String error)? failed,
   }) =>
       throw _privateConstructorUsedError;
@@ -299,7 +299,7 @@ mixin _$HomeState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(dynamic quotesList)? sucess,
+    TResult Function(List<QuotesReqModel> quotesList)? sucess,
     TResult Function(String error)? failed,
     required TResult orElse(),
   }) =>
@@ -388,7 +388,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(dynamic quotesList) sucess,
+    required TResult Function(List<QuotesReqModel> quotesList) sucess,
     required TResult Function(String error) failed,
   }) {
     return initial();
@@ -399,7 +399,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(dynamic quotesList)? sucess,
+    TResult? Function(List<QuotesReqModel> quotesList)? sucess,
     TResult? Function(String error)? failed,
   }) {
     return initial?.call();
@@ -410,7 +410,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(dynamic quotesList)? sucess,
+    TResult Function(List<QuotesReqModel> quotesList)? sucess,
     TResult Function(String error)? failed,
     required TResult orElse(),
   }) {
@@ -502,7 +502,7 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(dynamic quotesList) sucess,
+    required TResult Function(List<QuotesReqModel> quotesList) sucess,
     required TResult Function(String error) failed,
   }) {
     return loading();
@@ -513,7 +513,7 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(dynamic quotesList)? sucess,
+    TResult? Function(List<QuotesReqModel> quotesList)? sucess,
     TResult? Function(String error)? failed,
   }) {
     return loading?.call();
@@ -524,7 +524,7 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(dynamic quotesList)? sucess,
+    TResult Function(List<QuotesReqModel> quotesList)? sucess,
     TResult Function(String error)? failed,
     required TResult orElse(),
   }) {
@@ -582,7 +582,7 @@ abstract class _$$SucessImplCopyWith<$Res> {
           _$SucessImpl value, $Res Function(_$SucessImpl) then) =
       __$$SucessImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({dynamic quotesList});
+  $Res call({List<QuotesReqModel> quotesList});
 }
 
 /// @nodoc
@@ -596,13 +596,13 @@ class __$$SucessImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? quotesList = freezed,
+    Object? quotesList = null,
   }) {
     return _then(_$SucessImpl(
-      freezed == quotesList
-          ? _value.quotesList
+      null == quotesList
+          ? _value._quotesList
           : quotesList // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as List<QuotesReqModel>,
     ));
   }
 }
@@ -610,10 +610,16 @@ class __$$SucessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SucessImpl implements _Sucess {
-  const _$SucessImpl(this.quotesList);
+  const _$SucessImpl(final List<QuotesReqModel> quotesList)
+      : _quotesList = quotesList;
 
+  final List<QuotesReqModel> _quotesList;
   @override
-  final dynamic quotesList;
+  List<QuotesReqModel> get quotesList {
+    if (_quotesList is EqualUnmodifiableListView) return _quotesList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_quotesList);
+  }
 
   @override
   String toString() {
@@ -626,12 +632,12 @@ class _$SucessImpl implements _Sucess {
         (other.runtimeType == runtimeType &&
             other is _$SucessImpl &&
             const DeepCollectionEquality()
-                .equals(other.quotesList, quotesList));
+                .equals(other._quotesList, _quotesList));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(quotesList));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_quotesList));
 
   @JsonKey(ignore: true)
   @override
@@ -644,7 +650,7 @@ class _$SucessImpl implements _Sucess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(dynamic quotesList) sucess,
+    required TResult Function(List<QuotesReqModel> quotesList) sucess,
     required TResult Function(String error) failed,
   }) {
     return sucess(quotesList);
@@ -655,7 +661,7 @@ class _$SucessImpl implements _Sucess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(dynamic quotesList)? sucess,
+    TResult? Function(List<QuotesReqModel> quotesList)? sucess,
     TResult? Function(String error)? failed,
   }) {
     return sucess?.call(quotesList);
@@ -666,7 +672,7 @@ class _$SucessImpl implements _Sucess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(dynamic quotesList)? sucess,
+    TResult Function(List<QuotesReqModel> quotesList)? sucess,
     TResult Function(String error)? failed,
     required TResult orElse(),
   }) {
@@ -715,9 +721,9 @@ class _$SucessImpl implements _Sucess {
 }
 
 abstract class _Sucess implements HomeState {
-  const factory _Sucess(final dynamic quotesList) = _$SucessImpl;
+  const factory _Sucess(final List<QuotesReqModel> quotesList) = _$SucessImpl;
 
-  dynamic get quotesList;
+  List<QuotesReqModel> get quotesList;
   @JsonKey(ignore: true)
   _$$SucessImplCopyWith<_$SucessImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -789,7 +795,7 @@ class _$FailedImpl implements _Failed {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(dynamic quotesList) sucess,
+    required TResult Function(List<QuotesReqModel> quotesList) sucess,
     required TResult Function(String error) failed,
   }) {
     return failed(error);
@@ -800,7 +806,7 @@ class _$FailedImpl implements _Failed {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(dynamic quotesList)? sucess,
+    TResult? Function(List<QuotesReqModel> quotesList)? sucess,
     TResult? Function(String error)? failed,
   }) {
     return failed?.call(error);
@@ -811,7 +817,7 @@ class _$FailedImpl implements _Failed {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(dynamic quotesList)? sucess,
+    TResult Function(List<QuotesReqModel> quotesList)? sucess,
     TResult Function(String error)? failed,
     required TResult orElse(),
   }) {

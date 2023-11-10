@@ -12,7 +12,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     // Initialize your bloc or handle this initialization appropriately
-    HomeBloc().add(const _GetData());
+    HomeBloc().add(HomeEvent.getData());
   }
 
   @override
@@ -34,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 if (state is _Loading) {
                   return Center(child: CircularProgressIndicator());
                 } else if (state is _Sucess) {
+                  final detailsList = state.quotesList;
                   return ListView.builder(
                     itemCount: state.quotesList.length,
                     itemBuilder: (context, index) {
@@ -50,8 +51,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text("Quote: ${state.quotesList[index].q}"),
-                              Text("Author: ${state.quotesList[index].a}"),
+                              Text("Quote: ${detailsList[index].q}"),
+                              Text("Author: ${detailsList[index].a}"),
                             ],
                           ),
                         ),
