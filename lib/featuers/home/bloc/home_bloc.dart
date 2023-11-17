@@ -14,7 +14,7 @@ part 'package:quote_quill/featuers/home/home.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(_Initial()) {
     on<_GetData>((event, emit) async {
-      emit(_Loading());
+      emit(const _Loading());
       final QuotesRepo quotesRepo = QuotesRepo();
       final response = await quotesRepo.quotesReq();
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:quote_quill/featuers/home/bloc/home_bloc.dart';
 
+//testing 1
 void main() {
   runApp(const MyApp());
 }

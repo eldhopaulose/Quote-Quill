@@ -8,11 +8,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  late HomeBloc bloc;
   @override
   void initState() {
     super.initState();
     // Initialize your bloc or handle this initialization appropriately
-    HomeBloc().add(HomeEvent.getData());
+    bloc = context.read<HomeBloc>();
+   bloc.add(const _GetData());
   }
 
   @override
